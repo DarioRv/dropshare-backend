@@ -10,6 +10,11 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@upload/*": ["src/upload/*"],
+      "@scan/*": ["src/scan/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
