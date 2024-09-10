@@ -10,7 +10,7 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
-  app.enableCors({ origin: 'http://localhost:4200' });
+  app.enableCors({ origin: process.env['ORIGIN'] });
 
   const config = new DocumentBuilder()
     .setTitle('DropShare')
