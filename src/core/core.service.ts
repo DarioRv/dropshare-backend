@@ -19,8 +19,8 @@ export class CoreService {
   ) {}
 
   async saveFile(file: Express.Multer.File) {
+    const url = await this.uploadService.upload(file);
     try {
-      const url = await this.uploadService.upload(file);
       const fileEntity = this.fileRepository.create({
         name: file.originalname,
         type: file.mimetype.split('/')[1],
@@ -31,7 +31,9 @@ export class CoreService {
       return await this.fileRepository.save(fileEntity);
     } catch (err) {
       this.logger.error(`Could not upload file, ${err}`);
-      throw new InternalServerErrorException(`Could not upload file, ${err}`);
+      throw new InternalServerErrorException(
+        `No se pudo subir el archivo, ${err}`,
+      );
     }
   }
 
@@ -39,7 +41,7 @@ export class CoreService {
     const file = await this.fileRepository.findOneBy({ slug });
 
     if (!file) {
-      throw new NotFoundException('File not found');
+      throw new NotFoundException('Archivo no encontrado');
     }
 
     return file;

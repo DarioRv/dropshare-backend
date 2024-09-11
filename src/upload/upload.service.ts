@@ -27,7 +27,7 @@ export class UploadService {
         .upload_stream(
           {
             folder: folderName,
-            public_id: `${fileName}-${new Date()}`,
+            public_id: `${fileName}-${Date.now()}`,
           },
           (error, uploadResult) => {
             if (error) {
@@ -44,7 +44,7 @@ export class UploadService {
     const fileUploaded = await uploading;
     if (!fileUploaded) {
       throw new InternalServerErrorException(
-        'Could not upload file, possibly file is too large',
+        'No se pudo subir el archivo. ¿Es un archivo multimedia?',
       );
     }
 

@@ -34,7 +34,10 @@ export class CoreController {
       new ParseFilePipeBuilder()
         .addMaxSizeValidator({
           maxSize: 10 * 1024 * 1024,
-          message: 'File is too large',
+          message: 'El archivo supera el tamaño máximo permitido',
+        })
+        .addFileTypeValidator({
+          fileType: '.(jpg|jpeg|png|gif|bmp|mp3|wav|ogg|flac|mp4|avi|mov|mkv)$',
         })
         .build(),
     )
